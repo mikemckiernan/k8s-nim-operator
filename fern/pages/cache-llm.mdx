@@ -216,6 +216,25 @@ The product name, such as `h100`, `a100`, or `l40s` must match the model profile
 command in the *NVIDIA NIM for LLMs* documentation.
 The value is not case-sensitive.
 
+If you specify more than one entry, the caching job matches each entry separately.
+A model profile matches an entry when the profile matches the product name of the entry and, if the entry lists PCI IDs, one of the PCI IDs of the same entry.
+The caching job caches every model profile that matches at least one entry.
+
+The following partial specification requests the model profiles for an NVIDIA A100 and the model profiles for an NVIDIA H100 with PCI ID `2330`.
+
+```yaml
+spec:
+  source:
+    ngc:
+      model:
+        ...
+        gpus:
+        - product: "a100"
+        - product: "h100"
+          ids:
+          - "2330"
+```
+
 </td>
 <td>
 
